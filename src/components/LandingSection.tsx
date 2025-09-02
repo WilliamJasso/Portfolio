@@ -21,7 +21,7 @@ export default function LandingSection() {
               <Button variant="outline" onClick={() => document.getElementById('contactme-section')?.scrollIntoView({ behavior: 'smooth' })}>Contact me</Button>
             </HStack>
           </VStack>
-          <Image src="https://i.pravatar.cc/300?img=7" alt="Avatar" borderRadius="full" boxSize={{ base: '180px', md: '260px' }} shadow="lg" />
+        <Image src="/iconWilliam.png" alt="Avatar" borderRadius="full" boxSize={{ base: '180px', md: '260px' }} shadow="lg" />
         </Flex>
       </Container>
     </Box>
