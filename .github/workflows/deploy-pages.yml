@@ -41,9 +41,7 @@ jobs:
           fi
 
       - name: Build
-        run: |
-          npm run build
-          npx next export
+        run: npm run build
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -60,4 +58,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
