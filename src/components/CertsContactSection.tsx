@@ -30,6 +30,7 @@ const brandColors: Record<string, string> = {
 };
 
 export default function CertsContactSection() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
   return (
     <section id="certs-contact-section" className="relative py-24 grid place-items-center">
       {/* Background glows */}
@@ -80,7 +81,7 @@ export default function CertsContactSection() {
               >
                 {c.imageSrc ? (
                   <img
-                    src={c.imageSrc}
+                    src={`${basePath}${c.imageSrc}`}
                     alt={`${c.issuer} logo`}
                     className="h-[44px] w-[44px] sm:h-[50px] sm:w-[50px] object-contain transition-transform group-hover:scale-105"
                     loading="lazy"

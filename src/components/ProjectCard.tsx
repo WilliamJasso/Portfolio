@@ -12,9 +12,11 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ title, description, imageSrc, tags, link }: ProjectCardProps) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const resolvedSrc = imageSrc.startsWith('/') ? `${basePath}${imageSrc}` : imageSrc;
   return (
     <article className="h-full overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
-      <img src={imageSrc} alt={title} className="h-[180px] w-full object-cover" />
+      <img src={resolvedSrc} alt={title} className="h-[180px] w-full object-cover" />
       <div className="p-4">
         <div className="flex flex-col items-start gap-2">
           <h3 className="text-lg font-semibold text-gray-900">{title}</h3>

@@ -27,8 +27,9 @@ import {
 import { FaDatabase } from 'react-icons/fa';
 import { MdDesignServices } from 'react-icons/md';
 import { motion, type Variants } from 'framer-motion';
+import type { IconType } from 'react-icons';
 
-type Item = { name: string; Icon?: React.ComponentType<any>; imageSrc?: string; note?: string };
+type Item = { name: string; Icon?: IconType; imageSrc?: string; note?: string };
 
 const groups: { title: string; items: Item[] }[] = [
   {
@@ -183,6 +184,7 @@ const itemVariants: Variants = {
 };
 
 export default function TechStackSection() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
   return (
     <section id="techstack-section" className="relative py-28 text-white grid place-items-center min-h-[100dvh]">
       {/* Background glows */}
@@ -276,7 +278,7 @@ export default function TechStackSection() {
                       />
                     ) : it.imageSrc ? (
                       <img
-                        src={it.imageSrc}
+                        src={`${basePath}${it.imageSrc}`}
                         alt={`${it.name} logo`}
                         className="h-[50px] w-[50px] sm:h-[56px] sm:w-[56px] object-contain transition-transform group-hover:scale-105"
                         loading="lazy"
