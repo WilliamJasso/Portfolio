@@ -1,22 +1,26 @@
 "use client";
 
-import { Box } from "@chakra-ui/react";
 import Header from "@/components/Header";
 import LandingSection from "@/components/LandingSection";
-import ProjectsSection from "@/components/ProjectsSection";
-import ContactMeSection from "@/components/ContactMeSection";
+import ExperienceSection from "@/components/ExperienceSection";
+import TechStackSection from "@/components/TechStackSection";
+import CertsContactSection from "@/components/CertsContactSection";
 import Footer from "@/components/Footer";
 
 export default function Page() {
   return (
     <>
-      <Header />
-      <Box pt={{ base: 16, md: 16 }}>
+     
+      <div className="pt-16">
         <LandingSection />
-        <ProjectsSection />
-        <ContactMeSection />
+        <ExperienceSection />
+        <div aria-hidden className="h-32 md:h-48 lg:h-40" />
+        <TechStackSection />
+         <div aria-hidden className="h-32 md:h-48 lg:h-40" />
+        <CertsContactSection />
+   <div aria-hidden className="h-32 md:h-48 lg:h-40" />
         <Footer />
-      </Box>
+      </div>
     </>
   );
 }

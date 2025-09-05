@@ -1,43 +1,114 @@
 'use client';
 
-import { Box, Container, HStack, VStack, Heading, Text, TagRoot, TagLabel, Button, Image, Flex } from '@chakra-ui/react';
+import React from 'react';
+import { motion, useScroll, useTransform, type Variants } from 'framer-motion';
+import { FaGithub, FaLinkedin, FaEnvelope, FaChevronDown } from 'react-icons/fa';
 
 const greeting = 'Hi, I’m William 👋';
-const bio1 = 'Full‑stack dev crafting efficient SAP/Salesforce integrations & polished UIs.';
-const bio2 = 'I love React, data‑driven dashboards, and building tools that scale.';
+const bio2 = 'I design and build apps, automations, solutions, integrations, and dashboards, delivering impact with strategy and purpose.';
+const bio1 = 'IT Engineer full stack and tech enthusiast with a passion for development..';
+
+const containerVariants: Variants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.12 }
+  }
+};
+
+const itemUp: Variants = {
+  hidden: { opacity: 0, y: 18 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: 'easeOut' }
+  }
+};
 
 export default function LandingSection() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const { scrollY } = useScroll();
+  const glowY = useTransform(scrollY, [0, 600], [0, -40]);
   return (
-    <Box as="section" id="landing-section" minH="100dvh" display="grid" placeItems="center">
-      <Container maxW="6xl">
-        <Flex gap={20} align="center" justify="space-between" direction={{ base: 'column', md: 'row' }}>
-          <Box position="relative" flex="1" minW={0}>
-            <Box
+    <section id="landing-section" className="min-h-[100dvh] grid place-items-center">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-10">
+          <div className="relative flex-1 min-w-0">
+            <motion.div
               aria-hidden
-              position="absolute"
-              left={{ base: '-40px', md: '-20px' }}
-              top={{ base: '-30px', md: '-10px' }}
-              w={{ base: '240px', md: '320px' }}
-              h={{ base: '240px', md: '320px' }}
-              borderRadius="full"
-              bg="rgba(48, 84, 176, 0.22)"
-              filter="blur(80px)"
-              pointerEvents="none"
+              className="pointer-events-none absolute rounded-full blur-[80px] animate-pulse"
+              style={{
+                left: '-40px',
+                top: '-30px',
+                width: '240px',
+                height: '240px',
+                background: 'rgba(48, 84, 176, 0.54)',
+                animationDuration: '4.5s',
+                // opcional: otro ritmo
+                animationDelay: '0.8s',
+                y: glowY
+              }}
             />
-            <VStack position="relative" align="flex-start" gap={4} maxW={{ base: 'full', md: 'lg' }}>
-            
-              <Heading as="h1" size="2xl">{greeting}</Heading>
-              <Text fontSize="lg" opacity={0.9}>{bio1}</Text>
-              <Text fontSize="lg" opacity={0.9}>{bio2}</Text>
-              <HStack pt={2} gap={3}>
-                <Button colorPalette="teal" onClick={() => document.getElementById('projects-section')?.scrollIntoView({ behavior: 'smooth' })}>See projects</Button>
-                <Button variant="outline" onClick={() => document.getElementById('contactme-section')?.scrollIntoView({ behavior: 'smooth' })}>Contact me</Button>
-              </HStack>
-            </VStack>
-          </Box>
-          <Image src="/iconWilliam.png" alt="Avatar" borderRadius="full" boxSize={{ base: '180px', md: '260px' }} shadow="lg" />
-        </Flex>
-      </Container>
-    </Box>
+            <motion.div
+              className="relative flex flex-col items-center md:items-start gap-4 max-w-full md:max-w-lg text-center md:text-left"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.5 }}
+            >
+              <motion.h1 className="text-4xl md:text-5xl font-bold text-white" variants={itemUp}>{greeting}</motion.h1>
+              <motion.p className="text-lg text-white/80" variants={itemUp}>{bio1}</motion.p>
+              <motion.p className="text-lg text-white/80" variants={itemUp}>{bio2}</motion.p>
+              <div className="flex items-center gap-4 pt-2 justify-center md:justify-start">
+                <motion.a
+                  whileHover={{ y: -3, scale: 1.06 }}
+                  whileFocus={{ y: -3, scale: 1.06 }}
+                  href="https://github.com/WilliamJasso"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  title="GitHub"
+                  className="text-white/80 hover:text-white"
+                >
+                  <FaGithub size={22} />
+                </motion.a>
+                <motion.a
+                  whileHover={{ y: -3, scale: 1.06 }}
+                  whileFocus={{ y: -3, scale: 1.06 }}
+                  href="https://www.linkedin.com/in/william-jasso-ortiz-4208a7261/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  title="LinkedIn"
+                  className="text-white/80 hover:text-white"
+                >
+                  <FaLinkedin size={22} />
+                </motion.a>
+                <motion.a
+                  whileHover={{ y: -3, scale: 1.06 }}
+                  whileFocus={{ y: -3, scale: 1.06 }}
+                  href="mailto:willijasso1@gmail.com"
+                  aria-label="Email"
+                  title="Email"
+                  className="text-white/80 hover:text-white"
+                >
+                  <FaEnvelope size={22} />
+                </motion.a>
+              </div>
+            </motion.div>
+          </div>
+          <motion.img
+            src={`${basePath}/iconWilliam.png`}
+            alt="Avatar"
+            className="h-[180px] w-[180px] rounded-full shadow-lg object-cover md:h-[260px] md:w-[260px]"
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+            whileHover={{ rotate: 1, scale: 1.02 }}
+          />
+        </div>
+      </div>
+
+    </section>
   );
 }

@@ -1,21 +1,6 @@
 'use client';
 
-import {
-  CardRoot,
-  CardBody,
-  CardFooter,
-  Image,
-  VStack,
-  Heading,
-  Text,
-  HStack,
-  TagRoot,
-  TagLabel,
-  Button,
-  Link as ChakraLink,
-  IconButton,
-  chakra,
-} from '@chakra-ui/react';
+import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 
 interface ProjectCardProps {
@@ -28,49 +13,32 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ title, description, imageSrc, tags, link }: ProjectCardProps) {
   return (
-    <CardRoot
-      h="100%"
-      overflow="hidden"
-      borderRadius="2xl"
-      shadow="md"
-      _hover={{ transform: 'translateY(-4px)', shadow: 'lg' }}
-      transition="all .2s ease"
-    >
-      <Image src={imageSrc} alt={title} objectFit="cover" w="100%" h="180px" />
-      <CardBody>
-        <VStack align="flex-start" gap={2}>
-          <Heading as="h3" size="md">
-            {title}
-          </Heading>
-          <Text fontSize="sm" color="gray.600">
-            {description}
-          </Text>
-          <HStack pt={1} wrap="wrap">
+    <article className="h-full overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
+      <img src={imageSrc} alt={title} className="h-[180px] w-full object-cover" />
+      <div className="p-4">
+        <div className="flex flex-col items-start gap-2">
+          <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+          <p className="text-sm text-gray-600">{description}</p>
+          <div className="flex flex-wrap items-center gap-2 pt-1">
             {tags?.map((t) => (
-              <TagRoot key={t} colorPalette="teal" variant="subtle">
-                <TagLabel>{t}</TagLabel>
-              </TagRoot>
+              <span key={t} className="inline-flex items-center rounded-full bg-teal-100 px-2.5 py-1 text-xs font-medium text-teal-800">
+                {t}
+              </span>
             ))}
-          </HStack>
-        </VStack>
-      </CardBody>
-      <CardFooter>
-        <HStack w="full" justify="space-between">
-          <ChakraLink href={link} target="_blank" rel="noopener noreferrer">
-            <Button colorPalette="teal" variant="ghost">
-              View
-              <chakra.span ml="2" display="inline-flex">
-                <FaArrowRight />
-              </chakra.span>
-            </Button>
-          </ChakraLink>
-          <ChakraLink href={link} target="_blank" rel="noopener noreferrer">
-            <IconButton aria-label="open" variant="ghost">
-              <FaArrowRight />
-            </IconButton>
-          </ChakraLink>
-        </HStack>
-      </CardFooter>
-    </CardRoot>
+          </div>
+        </div>
+      </div>
+      <div className="px-4 py-3">
+        <div className="flex w-full items-center justify-between">
+          <a href={link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-teal-700 hover:text-teal-900">
+            <span>View</span>
+            <FaArrowRight />
+          </a>
+          <a href={link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-md p-2 hover:bg-gray-100" aria-label="open">
+            <FaArrowRight />
+          </a>
+        </div>
+      </div>
+    </article>
   );
 }

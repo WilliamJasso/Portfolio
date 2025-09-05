@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Container, VStack, Heading, Text, SimpleGrid } from '@chakra-ui/react';
+import React from 'react';
 import ProjectCard from './ProjectCard';
 
 const projects = [
@@ -35,19 +35,18 @@ const projects = [
 
 export default function ProjectsSection() {
   return (
-    <Box as="section" id="projects-section" minH="100dvh" display="grid" alignItems="center" bg="white">
-      <Container maxW="6xl" py={16}>
-        <VStack align="flex-start" gap={6}>
-          <Heading size="xl">Featured Projects</Heading>
-          <Text color="gray.600">Some things I’ve shipped recently.</Text>
-          <SimpleGrid columns={{ base: 1, sm: 2, lg: 3 }} gap={6} pt={4}>
+    <section id="projects-section" className="min-h-[100dvh] grid items-center bg-white">
+      <div className="max-w-6xl mx-auto px-4 py-16">
+        <div className="flex flex-col items-start gap-6">
+          <h2 className="text-3xl font-bold text-gray-900">Featured Projects</h2>
+          <p className="text-gray-600">Some things I’ve shipped recently.</p>
+          <div className="grid grid-cols-1 gap-6 pt-4 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((p) => (
-              // eslint-disable-next-line react/jsx-key
               <ProjectCard key={p.id} {...p} />
             ))}
-          </SimpleGrid>
-        </VStack>
-      </Container>
-    </Box>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
