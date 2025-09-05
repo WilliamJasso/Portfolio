@@ -11,7 +11,6 @@ import {
   SiPhp,
   SiFlutter,
   SiMongodb,
-  SiMicrosoftsqlserver,
   SiNodedotjs,
   SiPython,
   SiR,
